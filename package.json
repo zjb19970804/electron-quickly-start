@@ -1,0 +1,119 @@
+{
+  "name": "electron-demo",
+  "description": "a test electron program",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "author": {
+    "name": "zjb",
+    "email": "1070179206@qq.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start-main-dev": "cross-env NODE_ENV=development electron -r @babel/register ./src/main.ts",
+    "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.renderer.dev.js",
+    "build": "concurrently \"yarn build-renderer\" \"yarn build-main\"",
+    "build-main": "cross-env NODE_ENV=production webpack --config config/webpack.config.main.prod.js --colors",
+    "build-renderer": "cross-env NODE_ENV=production webpack --config config/webpack.config.renderer.prod.js --colors",
+    "relase": "electron-builder"
+  },
+  "build": {
+    "productName": "test-weg",
+    "appId": "com.weg.car",
+    "copyright": "zjb",
+    "directories": {
+      "output": "app"
+    },
+    "win": {
+      "icon": "resource/favicon.ico",
+      "target": [
+        {
+          "target": "nsis"
+        }
+      ]
+    },
+    "linux": {
+      "icon": "./resource",
+      "target": "deb",
+      "executableName": "test-weg",
+      "category": "Utility",
+      "desktop": {
+        "Name": "test car table",
+        "Icon": "./resource",
+        "Type": "Application",
+        "Comment": "test test test test",
+        "Categories": "Utility"
+      }
+    }
+  },
+  "files": [
+    "./dist"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{css,less,scss}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "antd": "^3.25.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@babel/preset-typescript": "^7.7.2",
+    "@babel/register": "^7.7.0",
+    "@hot-loader/react-dom": "^16.11.0",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-redux": "^7.1.5",
+    "@types/react-router-dom": "^5.1.2",
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.12.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^5.0.0",
+    "cross-env": "^6.0.3",
+    "css-loader": "^3.2.0",
+    "electron": "^7.1.1",
+    "electron-builder": "20.44.4",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.3",
+    "prettier": "^1.19.1",
+    "react-hot-loader": "^4.12.17",
+    "style-loader": "^1.0.0",
+    "terser-webpack-plugin": "^2.2.1",
+    "typescript": "^3.7.2",
+    "url-loader": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2"
+  }
+}
