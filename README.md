@@ -1,1 +1,1 @@
-electron typescript !
+electron typescript
